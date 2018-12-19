@@ -81,11 +81,8 @@ BUILD_RAMDISK=0
 BUILD_MODULES=0
 
 # Parse all command line options...
-Options=$* # Save for later
-while [ $# -gt 0 ]
-do
-    Option=$1; shift
-    parse_cmdline $Option
+for i in "$@"; do
+    parse_cmdline "${i}"
 done
 
 # Check if no action is specified...
@@ -97,7 +94,7 @@ fi
 
 clear_log
 NORMAL=${GOOD} print_info 1 "Gentoo Linux Genkernel; Version ${GK_V}${NORMAL}"
-print_info 1 "Running with options: ${Options}"
+print_info 1 "Running with options: ${@}"
 echo
 
 # Set ${ARCH}
